@@ -52,6 +52,18 @@ app.post("/blogs", function(req, res){
         }
     })
 })
+
+//SHOW ROUTE
+app.get("/blogs/:id", function(req, res){
+    blog.findById(req.params.id, function(err, foundBlog){
+        if(err){
+            res.redirect("/blogs");
+        }else{
+            res.render("show", {blog: foundBlog});
+        }
+    })
+})
+
 app.listen(process.env.PORT || 3000, function(){
     console.log("The server has Started");
 })
