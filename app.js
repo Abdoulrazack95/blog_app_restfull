@@ -21,6 +21,20 @@ var blogSchema = new mongoose.Schema({
 
 var blog = mongoose.model("blog", blogSchema);
 
+//RESTFUL  ROUTES
+app.get("/", function(req, res){
+    res.redirect("/blogs");
+})
+
+app.get("/blogs", function(req, res){
+    blog.find({}, function(err, blogs){
+        if(err){
+            console.log(err);
+        }else{
+            res.render("index", {blogs: blogs});
+        }
+    })
+})
 
 app.listen(process.env.PORT || 3000, function(){
     console.log("The server has Started");
