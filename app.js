@@ -19,6 +19,8 @@ var blogSchema = new mongoose.Schema({
     created:    {type:Date, default: Date.now}
 })
 
+var blog = mongoose.model("blog", blogSchema);
+
 
 app.listen(process.env.PORT || 3000, function(){
     console.log("The server has Started");
