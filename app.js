@@ -11,6 +11,15 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 
+// Mongoose Configuration
+var blogSchema = new mongoose.Schema({
+    title:      String,
+    image:      String,
+    body:       String,
+    created:    {type:Date, default: Date.now}
+})
+
+
 app.listen(process.env.PORT || 3000, function(){
     console.log("The server has Started");
 })
