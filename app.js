@@ -1,7 +1,7 @@
 var express     =   require("express");
 mongoose        =   require("mongoose");
 bodyParser      =   require("body-parser");
-methodOverride  = require("method-override");
+methodOverride  =   require("method-override");
 app             =   express();
 
     mongoose.connect("mongodb://localhost:27017/blog_app", { useNewUrlParser: true });
@@ -79,7 +79,13 @@ app.get("/blogs/:id/edit", function(req,res){
 
 //UPDATE ROUTE
 app.put("/blogs/:id", function(req, res){
-    res.send("I dont knnow");
+    blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
+        if(err){
+            res.redirect("/blogs");
+        }else{
+            res.redirect("/blogs/" + req.params.id);
+        }
+    });
 })
 
 app.listen(process.env.PORT || 3000, function(){
